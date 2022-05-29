@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32407.343
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDelta", "FindingDelta\FindingDelta.csproj", "{C54E0262-42C2-4FDC-96C0-E4BD79095639}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F8AF506A-6459-43A0-B58A-4D632A2988C0} = {F8AF506A-6459-43A0-B58A-4D632A2988C0}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindingDelta.logic", "FindingDelta.logic\FindingDelta.logic.csproj", "{F8AF506A-6459-43A0-B58A-4D632A2988C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C54E0262-42C2-4FDC-96C0-E4BD79095639}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54E0262-42C2-4FDC-96C0-E4BD79095639}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54E0262-42C2-4FDC-96C0-E4BD79095639}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54E0262-42C2-4FDC-96C0-E4BD79095639}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8AF506A-6459-43A0-B58A-4D632A2988C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8AF506A-6459-43A0-B58A-4D632A2988C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8AF506A-6459-43A0-B58A-4D632A2988C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8AF506A-6459-43A0-B58A-4D632A2988C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA99C114-CA34-4CA2-A35B-F87FB94F8001}
+	EndGlobalSection
+EndGlobal
