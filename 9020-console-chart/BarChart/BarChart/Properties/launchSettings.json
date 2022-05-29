@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BarChart": {
+      "commandName": "Project",
+      "commandLineArgs": "animal attacks 50 < data.txt"
+    }
+  }
+}
