@@ -1,0 +1,7 @@
+1) Install C# to TypeScript in Visual Code
+https://marketplace.visualstudio.com/items?itemName=adrianwilczynski.csharp-to-typescript
+
+2) Copy the C# classes into the clipboard (ctrl-c)
+
+3) In VS Code press F1 and type >C# to TypeScript (Paste As)
+
