@@ -1,0 +1,81 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Event Management",
+    "version": "1.0.0",
+    "description": "Web API for maintaining a list of events"
+  },
+  "servers": [
+    {
+      "url": "www.events.com/api",
+      "variables": {}
+    }
+  ],
+  "paths": {
+    "/events": {
+      "get": {
+        "summary": "Return all the events",
+        "description": "Return a **list of all the events** in the database",
+        "operationId": "GetAllEvents",
+        "responses": {
+          "200": {
+            "description": "OK. Returned a list of all events.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/event"
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "There is no events in the DB."
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Events"
+        ],
+        "externalDocs": {
+          "url": "https://mydocs.com/events",
+          "description": "More information on the documentation"
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "event": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Primary key for events"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of the event"
+          },
+          "location": {
+            "type": "string",
+            "minLength": 10,
+            "maxLength": 250,
+            "description": "The location of the event"
+          }
+        },
+        "required": [
+          "id",
+          "date"
+        ]
+      }
+    }
+  }
+}
