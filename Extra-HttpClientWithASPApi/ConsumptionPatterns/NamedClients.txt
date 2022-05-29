@@ -1,0 +1,58 @@
+
+
+1. Register in the DI container the use of HttpClient using AddHttpClient
+name it (in program.cs). This can be configured at this step.
+Also register a service to use the IHttpClientFactory.
+
+builder.Services.AddHttpClient("NamedClient", httpClient => 
+    httpClient.BaseAddress = new Uri("https://api.chucknorris.io")
+);
+
+builder.Services.AddScoped<INamedClientService, NamedClientService>();
+
+
+2. In the service use the IHttpClientFactory to create an httpClient:
+Note that as the BaseAddress is already configured, we only need the relative part.
+
+public interface IBasicUsageService
+{
+    public Task<string> GetRandom();
+}
+
+public class NamedClientService : INamedClientService
+{
+    private readonly IHttpClientFactory _httpClientFactory;
+    public NamedClientService(IHttpClientFactory httpClientFactory)
+    {
+        _httpClientFactory = httpClientFactory;
+    }
+
+    public async Task<string> GetRandom()
+    {
+        
+        var uri = new Uri("/jokes/random", UriKind.Relative);
+
+        var httpClient = _httpClientFactory.CreateClient("NamedClient");
+
+        return await httpClient.GetStringAsync(uri);
+    }
+}
+
+3. Use the service in the controller
+[Route("api/[controller]")]
+[ApiController]
+public class NamedClientController : ControllerBase
+{
+    private readonly INamedClientService _namedClientService;
+
+    public NamedClientController(INamedClientService namedClientService)
+    {
+        _namedClientService = namedClientService;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<string>> GetRandom()
+    {
+        return await _namedClientService.GetRandom();
+    }
+}

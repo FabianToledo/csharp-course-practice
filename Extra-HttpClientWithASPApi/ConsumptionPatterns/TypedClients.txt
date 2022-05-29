@@ -1,0 +1,50 @@
+1. Implement the Typed Client class:
+
+public interface ITypedClientService
+{
+    public Task<string> GetRandom();
+}
+
+public class TypedClientService : ITypedClientService
+{
+    private readonly HttpClient _httpClient;
+    public TypedClientService(HttpClient httpClient)
+    {
+        //We can configure the httpClient here:
+        httpClient.BaseAddress = new Uri("https://api.chucknorris.io");
+
+        _httpClient = httpClient;
+    }
+
+    public async Task<string> GetRandom()
+    {
+        var uri = new Uri("/jokes/random", UriKind.Relative);
+
+        return await _httpClient.GetStringAsync(uri);
+    }
+}
+
+2. Register the typed class (services that uses HttpClient) in the DI container in program.cs
+...
+builder.Services.AddHttpClient<ISomeService, SomeService>();
+...
+
+
+3. Use the service in the controller
+[Route("api/[controller]")]
+[ApiController]
+public class TypedClientController : ControllerBase
+{
+    private readonly ITypedClientService _typedClientService;
+
+    public TypedClientController(ITypedClientService typedClientService)
+    {
+        _typedClientService = typedClientService;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<string>> GetRandom()
+    {
+        return await _typedClientService.GetRandom();
+    }
+}

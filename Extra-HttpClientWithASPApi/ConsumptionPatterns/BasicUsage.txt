@@ -1,0 +1,55 @@
+
+
+1. Register in the DI container the use of HttpClient using AddHttpClient (in program.cs)
+also register a service to use the IHttpClientFactory.
+
+// Register the basic usage of HttpClient to inject IHttpClientFactory
+builder.Services.AddHttpClient();
+
+// Register a service in DI container
+builder.Services.AddScoped<IBasicUsageService, BasicUsageService>();
+
+2. In the service use the IHttpClientFactory to create an httpClient:
+
+public interface IBasicUsageService
+{
+    public Task<string> GetRandom();
+}
+
+public class BasicUsageService : IBasicUsageService
+{
+    private readonly IHttpClientFactory _httpClientFactory;
+    public BasicUsageService(IHttpClientFactory httpClientFactory)
+    {
+        _httpClientFactory = httpClientFactory;
+    }
+
+    public async Task<string> GetRandom()
+    {
+        var baseUri = new Uri("https://api.chucknorris.io");
+        var uri = new Uri(baseUri, "/jokes/random");
+
+        var httpClient = _httpClientFactory.CreateClient();
+
+        return await httpClient.GetStringAsync(uri);
+    }
+}
+
+3. Use the service in the controller
+[Route("api/[controller]")]
+[ApiController]
+public class BasicUsageController : ControllerBase
+{
+    private readonly IBasicUsageService _basicUsageService;
+
+    public BasicUsageController(IBasicUsageService basicUsageService)
+    {
+        _basicUsageService = basicUsageService;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<string>> GetRandom()
+    {
+        return await _basicUsageService.GetRandom();
+    }
+}
