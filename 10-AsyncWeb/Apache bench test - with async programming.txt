@@ -1,0 +1,59 @@
+// Simulate a Well done access to (e.g.) a DB
+    await Task.Delay(2000); // GOOD because it does not block the execution 
+				
+D:\Courses\C# - HTL leonding\Programas\apache\Apache24\bin>ab -n 1000 -c 200 http://localhost:5119/
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Completed 600 requests
+Completed 700 requests
+Completed 800 requests
+Completed 900 requests
+Completed 1000 requests
+Finished 1000 requests
+
+
+Server Software:        Kestrel
+Server Hostname:        localhost
+Server Port:            5119
+
+Document Path:          /
+Document Length:        12 bytes
+
+Concurrency Level:      200
+Time taken for tests:   12.538 seconds
+Complete requests:      1000
+Failed requests:        0
+Total transferred:      104000 bytes
+HTML transferred:       12000 bytes
+Requests per second:    79.76 [#/sec] (mean)
+Time per request:       2507.523 [ms] (mean)
+Time per request:       12.538 [ms] (mean, across all concurrent requests)
+Transfer rate:          8.10 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.5      0       1
+Processing:  2003 2065  44.2   2057    2166
+Waiting:     2003 2062  43.7   2052    2164
+Total:       2003 2065  44.2   2057    2166
+
+Percentage of the requests served within a certain time (ms)
+  50%   2057
+  66%   2085
+  75%   2105
+  80%   2112
+  90%   2127
+  95%   2141
+  98%   2153
+  99%   2160
+ 100%   2166 (longest request)
+
+D:\Courses\C# - HTL leonding\Programas\apache\Apache24\bin>
