@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloLinq", "HelloLinq\HelloLinq.csproj", "{A5228EF5-E301-4AC5-8DF0-DEAEABE57B54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5228EF5-E301-4AC5-8DF0-DEAEABE57B54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5228EF5-E301-4AC5-8DF0-DEAEABE57B54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5228EF5-E301-4AC5-8DF0-DEAEABE57B54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5228EF5-E301-4AC5-8DF0-DEAEABE57B54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6A3AD21-A663-43AF-9CEE-495463854D64}
+	EndGlobalSection
+EndGlobal
