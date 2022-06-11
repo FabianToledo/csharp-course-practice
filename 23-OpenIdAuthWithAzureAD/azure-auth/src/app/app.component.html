@@ -1,0 +1,8 @@
+<h1>Auth Sample</h1>
+
+<button (click)="login()" [hidden]="loggedIn">Login</button>
+<button (click)="logout()" [hidden]="!loggedIn" >Logout</button>
+
+<div *ngIf="loggedIn">
+    <h2>We are logged in :)</h2>
+</div>

@@ -1,0 +1,100 @@
+Actors
+------
+
+* Resource Owner: the user
+* Client: the client app (desktop, mobile, web, etc.)
+* Protected resource: the API
+* Authorization server: e.g. Azure active directory (AD)
+
+Steps
+----- 
+
+1- The Resource Owner wants to use the Client (e.g. an Angular app). The Client App needs to access the Protected Resource with the identity of the Resource Owner.
+
+2- The Resource Owner login to the Authorization Server. The Resource Owner never types its password directly in the Client App,
+instead the Client App redirects or shows a popup with the login coming from the Authorization Server.
+
+3- The Resource Owner enters its credentials (password and username, fingerprint, faceID, etc.) in the Authorization Server login.
+
+4- The Authorization Server creates a Token thet contains information about who is the Resource Owner, Claims (first name, last name, e-mail, etc.).
+The Token is digitally signed by the Authorization Server. Also, the token is generated for a specific audience, i.e., only for a specific Protected Resource.
+
+5- The Token is redirected to the Client App and it can be used to access the Protected Resource (API).
+
+6- When the Protected Resource receives the Token it can check if:  
+
+ a- the token is for the Client App,  
+ b- the Resource Owner is who he claims to be?  
+ c- the token is for this Protected Resource (audience)?  
+ 
+7- If all these are true, then the Client App can access the Protected Resource.
+
+
+Azure AD
+--------
+
+1- Go to **portal.azure.com** and login.
+
+2- Go to **Azure Active Directory**.
+
+3- On the left menu got to **App Registrations**
+
+4- Registry the **Client App**  
+	a- Click on **New Registration**
+	b- Put the user-facing name for the application.
+	c- Give access, here we can choose the accounts which can access the application:
+	   * Only the organizational directory (the same organization in azure)
+	   * Any organizational directory (any organization in azure)
+	   * Any organizational directory and personal Microsoft accounts (Skype, Xbox, etc.)
+	   * Personal Microsoft accounts only.
+	d- Click on Create. Once created, we obtain 2 important IDs:
+	   * Application (client) ID: a0c1cfbc-a29b-4624-9d7a-eab510dae0e1 (identifies the client)
+	   * Directory (tenant) ID: e08fae28-e699-412e-b772-ca4ef45068a7 (identifies the authentication server)
+	e- We need to specify, how users are going to authenticate: click on the Manage --> Authentication menu.
+	   * Specify a platform on which we will build our client app (Web, Single page application or SPA (react, angular, etc.), iOS/macOS, Android, Windows mobile and desktop, etc.). + Add platform
+	   * We are going to implement an Angular App, so we chose a SPA
+	   * We have to specify a redirect URI (the URI accepted as destination when returning tokens after successfully authenticating.
+	   * Click on Configure. The flow is: Authorization Code Flow with PKCE.
+
+5- Registry the **Protected Resource**
+	f- API permissions:    
+	   By default, there is already an authorized API: Microsoft Graph -> **User.Read** it can be used to Sign in and read the user profile. (https://graph.microsoft.com/v1.0/me)
+	   The API permissions could be:  
+	   * Delegated permissions: where the app connects to the API on behalf of a user.  
+	   * Applications permissions: where an app is authorized to access an endpoint (e.g. a background app sending emails)  
+
+Angular App
+-----------
+
+Install or update the necessary packages:  
+npm install -g @angular/cli
+
+Create a basic Angular app without tests:  
+ng new azure-auth --minimal --skip-git --style css --strict --directory azure-auth --routing false
+
+cd azure-auth
+
+Install the dependencies
+------------------------
+
+npm install @azure/msal-angular
+
+npm install @azure/msal-browser
+
+npm install @microsoft/microsoft-graph-types --save-dev
+
+
+npm start
+
+
+
+
+
+
+
+
+
+
+
+
+
