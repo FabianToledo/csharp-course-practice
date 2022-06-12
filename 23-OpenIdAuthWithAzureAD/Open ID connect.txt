@@ -112,9 +112,9 @@ Register custom API on Azure AD
 Create an ASP.net API
 --------------------
 
-Install the nuget package: **Microsoft.Identity.Web**
+1. Install the nuget package: **Microsoft.Identity.Web**
 
-On Program.cs:  
+2. On Program.cs:  
 ##### Add to the services container:  
 ```
 builder.Services.AddMicrosoftIdentityWebApiAuthentication(builder.Configuration);
@@ -141,7 +141,25 @@ Add Authentication middleware
 app.UseAuthentication();
 ```
 
+3. Add the AzureAD configuration to *appsettings.json* file:
 
+```
+"AzureAd": {
+  // Login URL of Microsoft
+  "Instance": "https://login.microsoftonline.com/",
+  // Client ID of the API App Registration in AAD. 
+  // For more information see https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app
+  "ClientId": "52db4014-9bca-49ee-b0f0-8c033c3ab441",
+  // AAD Tenant Id
+  "TenantId": "931628cb-1eb4-4122-b9cd-3bf3fc8574d6",
+  // The API App's unique URI as specified during app registration.
+  // For more details see https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-expose-web-apis
+  "Audience": "api://ae2a7238-27aa-4604-b808-11b514e0b3fd"
+}
+```
+
+
+  
 
 
 
