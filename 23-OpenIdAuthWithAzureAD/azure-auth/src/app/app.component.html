@@ -5,4 +5,26 @@
 
 <div *ngIf="loggedIn">
     <h2>We are logged in :)</h2>
+
+    <h2>Profile</h2>
+
+    <button (click)="getProfile()">Get profile information</button>
+    <div *ngIf="profile">
+        <p>Display Name: {{ profile?.displayName }}</p>
+        <p>Email: {{ profile?.mail }}</p>
+    </div>
+
+    <h2>Other Users</h2>
+
+    <input type="text" [(ngModel)]="textToFilter">
+    <button (click)="getUsers()">Search</button>
+
+    <div *ngIf="users">
+        <ul>
+            <li *ngFor="let u of users">
+                {{u.displayName}} - {{u.mail}}
+            </li>
+        </ul>
+    </div>
+
 </div>
