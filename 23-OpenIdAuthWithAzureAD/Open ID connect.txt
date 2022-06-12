@@ -179,10 +179,45 @@ protectedResourceMap.set(environment.customApi, [
 ]);
 ```
 
+Test our custom protected API using postman
+-------------------------------------------
+
+1. On azure AD we need to add a platform to our Client App registration.
+	a. Go to App Registration and select the **Client App**  
+	b. Go to Authentication and click on **Add a platform**
+	c. Select Mobile and desktop applications.
+	d. On custom redirect URI write this postman uri: https://oauth.pstmn.io/v1/callback
+	
+2. Create a new Collection.
+
+3. On the tab Authorization
+	a. Select Type: OAuth 2.0
+	b. In the section Configure New Token:
+		i. Grant Type: Authorization Code (With PKCE) --> This is the type Authorization Code Flow with PKCE, as configured in Azure AD. 
+	c. Callback URL: https://oauth.pstmn.io/v1/callback (see postman documentation)	
+	d. Auth URL: https://login.microsoftonline.com/{{tenantId}}/oauth2/v2.0/authorize
+	e. Access Token URL: https://login.microsoftonline.com/{{tenantId}}/oauth2/v2.0/token
+	f. The Client ID for the client app.
+	g. scope: The permission to the api: e.g. api://48e1fdd4-eb87-4270-b78f-50ba712fb773/read
+	h. Click on Get New Access Token
+	i. This will cause an authentication page open. Once logged in, a new JWT token will be granted to use.
+
+> Note: the Postman Collection is saved on the file: **./OIDC API test.postman_collection.json**
 
 	
-	
-	   
+Check for claims in our API
+---------------------------
+
+There are 2 classes of constant values that we can use to look for a specific claim  
+ClaimTypes (defined in System.Security.Claims): Defines constants for the well-known claim types that can be assigned to a subject.  
+```
+Console.WriteLine($"User Name: {User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value}");
+```
+ClaimConstants (defined in Microsoft.Identity.Web): Constants for claim types used by microsoft
+```
+Console.WriteLine($"Object Id: {User.Claims.FirstOrDefault(c => c.Type == ClaimConstants.ObjectId)?.Value}");
+```
+
 
   
 
