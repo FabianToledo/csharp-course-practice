@@ -37,7 +37,7 @@ Azure AD
 
 2. Go to **Azure Active Directory**.
 
-3. On the left menu got to **App Registrations**
+3. On the left menu go to **App Registrations**
 
 4. Registry the **Client App**  
 	a. Click on **New Registration**
@@ -158,6 +158,31 @@ app.UseAuthentication();
 }
 ```
 
+Make our Client App ready to call the protected API
+---------------------------------------------------
+
+1. Registry the **Protected Resource** (custom API) in Azure AD
+	a. On the already registered **Client App**, go to API permissions:  
+    (Azure AD directory --> App Registrations --> **<registered client app>**) --> API permissions  
+	b. Add a permission  
+	Click on add a permision and select the My APIs tab. This will list applications that expose permissions. Select our registered custom API.
+	c. Type of permission: **Delegated permissions**  
+	Select read and write permissions.
+	d. click on Add permissions
+	
+2. Add to the Interceptor middleware of the client app, the customAPI mappings:
+
+```
+protectedResourceMap.set(environment.customApi, [
+  'api://ae2a7238-27aa-4604-b808-11b514e0b3fd/read',
+  'api://ae2a7238-27aa-4604-b808-11b514e0b3fd/write'
+]);
+```
+
+
+	
+	
+	   
 
   
 

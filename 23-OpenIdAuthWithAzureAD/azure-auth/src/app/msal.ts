@@ -30,10 +30,10 @@ export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
     'User.ReadBasic.All',
   ]);
 
-  // protectedResourceMap.set(environment.customApi, [
-  //   'api://14f9a758-cdba-47ba-8178-c0d54de0ab88/read',
-  //   'api://14f9a758-cdba-47ba-8178-c0d54de0ab88/write'
-  // ]);
+  protectedResourceMap.set(environment.customApi, [
+    'api://48e1fdd4-eb87-4270-b78f-50ba712fb773/read',
+    'api://48e1fdd4-eb87-4270-b78f-50ba712fb773/write'
+  ]);
 
   return {
     interactionType: InteractionType.Popup,

@@ -27,4 +27,14 @@
         </ul>
     </div>
 
+    <h2>Custom API calls</h2>
+    <button (click)="getOrders()">Get Orders</button>
+    <div *ngIf="orders">
+        <ul>
+            <li *ngFor="let o of orders">
+                {{o}}
+            </li>
+        </ul>
+    </div>
+
 </div>

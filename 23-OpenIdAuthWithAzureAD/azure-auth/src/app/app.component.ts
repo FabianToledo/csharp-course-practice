@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import * as MicrosoftGraph from '@microsoft/microsoft-graph-types'
+import { environment } from 'src/environments/environment';
 
 // defining this interface we are saying that the response
 // from the all users endpoint ('https://graph.microsoft.com/v1.0/users')
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
   profile?: MicrosoftGraph.User;
   users?: MicrosoftGraph.User[];
   textToFilter = "" ;
+  orders?: string[];
 
   constructor(private authService: MsalService,
     private client: HttpClient) {}
@@ -69,4 +71,8 @@ export class AppComponent implements OnInit {
       .subscribe(response => this.users = response.value)
   }
 
+  getOrders() {
+    this.client.get<string[]>(`${environment.customApi}/orders`)
+      .subscribe(response => this.orders = response);
+  }
 }
