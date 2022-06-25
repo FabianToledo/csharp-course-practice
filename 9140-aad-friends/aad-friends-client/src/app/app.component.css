@@ -1,0 +1,31 @@
+h2 {
+    text-align: center;  
+    color: darkslateblue;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    padding-top: 1em;
+}
+
+.friends-container {
+    width: 50%;
+    padding: 2em;
+}
+
+.search-container {
+    width: 50%;
+    padding: 2em;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}

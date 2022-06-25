@@ -1,0 +1,60 @@
+<div class="toolbar">
+    <mat-toolbar color="primary">
+      <button mat-icon-button aria-label="Friends">
+        <mat-icon>diversity_1</mat-icon>
+      </button>
+      <span>Friends in Azure Active Directory</span>
+      <span class="spacer"></span>
+      <span *ngIf="loggedIn">{{ profile?.displayName }}</span>
+      <button mat-flat-button color="primary" (click)="login()" *ngIf="!loggedIn">
+        <mat-icon>login</mat-icon>
+      </button>
+      <button mat-flat-button color="primary" (click)="logout()" *ngIf="loggedIn">
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+</div>
+
+
+<div class="container" *ngIf="loggedIn">
+
+    <div class="friends-container">
+        <h2>My friends</h2>
+        <div *ngIf="allAadUsers && friendsId">
+            <mat-list>
+                <mat-list-item *ngFor="let f of mapFriends(); last as last">
+                    <h4 mat-line>{{f.displayName}}</h4>
+                    <button mat-icon-button color="primary" (click)="removeFriend(f.id)">
+                        <mat-icon>remove</mat-icon>
+                    </button>
+                    <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+    <mat-divider [vertical]="true"></mat-divider>
+    <div class="search-container">
+        <h2>Search Users</h2>
+        <div class="search-bar">
+            <mat-form-field appearance="fill">
+                <mat-label>Input</mat-label>
+                <input matInput type="text" [(ngModel)]="textToFilter">
+            </mat-form-field>
+            <!-- <span class="spacer"></span> -->
+            <button mat-fab color="primary" (click)="getAadSearchedUsers(textToFilter)">Search</button>
+        </div>
+        <div *ngIf="aadSearchedUsers">
+            <mat-list>
+                <mat-list-item *ngFor="let u of aadSearchedUsers; last as last">
+                    <button mat-icon-button color="primary" (click)="addFriend(u.id)">
+                        <mat-icon>favorite_border</mat-icon>
+                    </button>
+                    <h4 mat-line>{{u.displayName}} - {{u.mail}}</h4>
+                    <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+
+    
+</div>
