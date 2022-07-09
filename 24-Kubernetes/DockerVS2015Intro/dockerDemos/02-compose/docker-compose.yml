@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  printer:
+    build: .
+    depends_on:
+    - dependent-service
+    command: ["./wait-for-it.sh", "ds:80", "--", "node", "server.js"]
+    links:
+    - "dependent-service:ds"
+  dependent-service:
+    build: ./dependentService
+    ports:
+      - "1337:80"

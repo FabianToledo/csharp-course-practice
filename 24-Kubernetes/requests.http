@@ -1,0 +1,49 @@
+###
+# Comunicating directly to minikube (or any kubernetes cluster)
+GET http://127.0.0.1:40827/api/v1/namespaces/default/pods
+Authorization: eyJhbGciOiJSUzI1NiIsImtpZCI6IlJGVjFpR1FROXV4SWhPelViOW1YSkEySkowLVo4WFRfNnljTFhTZGxObW8ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tcm16ZGQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImExM2Q0YWQ5LWUxM2YtNDJmZi1iZWY5LTMxYjhkNjExNmE2NyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.fW9q4dbJl7b-8taQhElDQLok-ax6HXkXt0pkh5XA4vpNB2lM4bwjVNppmOvGuEqrr664bGO3vtAtQJOugdQJMbn9YxMdPbdh0MCADhbbAtFLPNR8MT7Qy1Go_HmESz-b1iSiRhKmwXIrnXRkxXlHFqd4cdeB2axPaLfnVt72ncBrmnf6BidpusC7IgH3pFDqeW0LUh63sMXvF20eiN-0T87WFGjxF-t7-g4CKKV_281rK0u0qeG8gIVwNP_t1ojUrCx87Vfdo7s_R09bmIzgxaT06VPuNhwzs8RkYD5iWLHsQh232EGT8I11KBfXDxvy54mx74TDqGXqLJGzDqx7qw
+
+###
+# Using the kubectl proxy to comunicate to the kubernetes cluster:
+GET http://127.0.0.1:8001/api/v1/namespaces/default/pods
+
+###
+# Get the nodes
+GET http://127.0.0.1:8001/api/v1/nodes
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8001/api/v1/namespaces/default/pods
+Content
+Type: application/json
+
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "api-demo-pod",
+        "labels": {
+            "app": "api-demo"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "api-demo-pod",
+                "image": "nginx:alpine",
+                "ports": [
+                    {
+                        "containerPort": 80
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+###
+GET http://127.0.0.1:8001/api/v1/namespaces/default/pods?labelSelector=app%20in%20%28api-demo%29
+
+###
+DELETE http://127.0.0.1:8001/api/v1/namespaces/default/pods/api-demo-pod

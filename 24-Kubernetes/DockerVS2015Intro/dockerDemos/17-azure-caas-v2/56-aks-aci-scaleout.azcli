@@ -1,0 +1,13 @@
+cd ./56-aks-aci-scaleout
+
+# Install AKS ACI connector
+az aks install-connector --resource-group $RG --name $AKS --connector-name virtual-kubelet --os-type Linux
+# To delete: az aks remove-connector --resource-group $RG --name $AKS --connector-name virtual-kubelet
+
+# Verify
+kubectl get pods -l "app=virtual-kubelet-linux-westeurope-virtual-kubelet-for-aks"
+kubectl get nodes
+kubectl get pods --watch
+
+kubectl apply -f deployment.yaml
+kubectl delete -f deployment.yaml

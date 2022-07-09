@@ -1,0 +1,19 @@
+{
+  "name": "01-staticweb",
+  "version": "1.0.0",
+  "description": "",
+  "source": "src/index.html",
+  "scripts": {
+    "build": "parcel build",
+    "start": "parcel"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jquery": "^3.3.22",
+    "parcel": "^2.2.1"
+  },
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
+}

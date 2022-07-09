@@ -1,0 +1,125 @@
+
+1 - Go to WSL
+
+2 - Install kubectl and minikube
+
+3 - start minikube with:
+> minikube start
+
+4 - Get a list of secrets
+> kubectl get secret
+
+NAME                  TYPE                                  DATA   AGE
+default-token-rmzdd   kubernetes.io/service-account-token   3      172d
+
+5 - Get details of a secret
+> kubectl describe secret <name_of_secret>
+
+e.g.
+> kubectl describe secret default-token-rmzdd
+
+Name:         default-token-rmzdd
+Namespace:    default
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: default
+              kubernetes.io/service-account.uid: a13d4ad9-e13f-42ff-bef9-31b8d6116a67
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+namespace:  7 bytes
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6IlJGVjFpR1FROXV4SWhPelViOW1YSkEySkowLVo4WFRfNnljTFhTZGxObW8ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tcm16ZGQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImExM2Q0YWQ5LWUxM2YtNDJmZi1iZWY5LTMxYjhkNjExNmE2NyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.fW9q4dbJl7b-8taQhElDQLok-ax6HXkXt0pkh5XA4vpNB2lM4bwjVNppmOvGuEqrr664bGO3vtAtQJOugdQJMbn9YxMdPbdh0MCADhbbAtFLPNR8MT7Qy1Go_HmESz-b1iSiRhKmwXIrnXRkxXlHFqd4cdeB2axPaLfnVt72ncBrmnf6BidpusC7IgH3pFDqeW0LUh63sMXvF20eiN-0T87WFGjxF-t7-g4CKKV_281rK0u0qeG8gIVwNP_t1ojUrCx87Vfdo7s_R09bmIzgxaT06VPuNhwzs8RkYD5iWLHsQh232EGT8I11KBfXDxvy54mx74TDqGXqLJGzDqx7qw
+ca.crt:     1111 bytes
+
+6 - Access kubernetes API directly to get a list of pods
+
+> GET https://<kubernetes_IP>:<port>/apí/v1/namespaces/<Namespace>/pods
+> Authorization: <JWT_token>
+
+e.g.
+NOTE: for the request, we can use the VS code extension "REST Client" (paste the following into a request.http file and send it) 
+or use the extension "Thunder Client" (a lightweight client similar to postman)
+or use Postman.
+NOTE 2: if we are using minikube to test this we need to start the dashboard to get the port.
+> minikube dashboard --port=40827
+
+GET https://127.0.0.1:40827/api/v1/namespaces/default/pods
+Authorization: eyJhbGciOiJSUzI1NiIsImtpZCI6IlJGVjFpR1FROXV4SWhPelViOW1YSkEySkowLVo4WFRfNnljTFhTZGxObW8ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tcm16ZGQiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImExM2Q0YWQ5LWUxM2YtNDJmZi1iZWY5LTMxYjhkNjExNmE2NyIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmRlZmF1bHQifQ.fW9q4dbJl7b-8taQhElDQLok-ax6HXkXt0pkh5XA4vpNB2lM4bwjVNppmOvGuEqrr664bGO3vtAtQJOugdQJMbn9YxMdPbdh0MCADhbbAtFLPNR8MT7Qy1Go_HmESz-b1iSiRhKmwXIrnXRkxXlHFqd4cdeB2axPaLfnVt72ncBrmnf6BidpusC7IgH3pFDqeW0LUh63sMXvF20eiN-0T87WFGjxF-t7-g4CKKV_281rK0u0qeG8gIVwNP_t1ojUrCx87Vfdo7s_R09bmIzgxaT06VPuNhwzs8RkYD5iWLHsQh232EGT8I11KBfXDxvy54mx74TDqGXqLJGzDqx7qw
+
+
+This was to demonstrate that kubernetes is available through an API and kubectl is just a thin layer that helps to comunicate to the API.
+
+7 - We can get the pods using kubectl:
+> kubectl get pods
+
+-------------------------
+
+TRICK 1 - We can add a proxy to any kubernetes API through kubectl.
+If we run:
+
+> kubectl proxy
+Starting to serve on 127.0.0.1:8001
+
+this means that any http request sent to 127.0.0.1:8001 will be forwarded to the configured kubernetes API in kubectl
+injecting the authorization token in the process. So if we send the request:
+> GET https://127.0.0.1:8001/api/v1/namespaces/default/pods
+
+We don't need to add authorization token to the request.
+
+--------------------------
+
+How do we can tell the kubernetes cluster to create a pod?
+
+We send a configuration via the API specification.
+The next way to do it is not the usual way to do it, but the example is to
+understand that in the end is a call to the POST method of the API endpoint.
+
+POST http://127.0.0.1:8001/api/v1/namespaces/default/pods
+Content
+Type: application/json
+
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "api-demo-pod",
+        "labels": {
+            "app": "api-demo"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "api-demo-pod",
+                "image": "nginx:alpine",
+                "ports": [
+                    {
+                        "containerPort": 80
+                    }
+                ]
+            }
+        ]
+    }
+}
+
+---
+TRICK 2 - We can quickly access the pod using the proxy without having to spin a service.
+
+> kubectl port-forward api-demo-pod 8080:80
+
+The last sentence will forward the port 80 (container port) to the localhost port 8080.
+
+---
+
+To finish the demo, we can delete the pod:
+
+DELETE http://127.0.0.1:8001/api/v1/namespaces/default/pods/api-demo-pod
+
+
+
+
+
+
+
+

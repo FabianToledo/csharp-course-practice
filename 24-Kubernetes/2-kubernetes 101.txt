@@ -1,0 +1,31 @@
+
+# Kubernetes 101
+
+## [Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
+Typically one, sometimes multiple containers (tightly coupled)
+
+## [Service](https://kubernetes.io/docs/concepts/services-networking/service/)
+Each services gets its own stable IP address, DNS name, and port
+Uses labels to dynamically associate with Pods
+
+## [ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
+Number of replicas for a Pod
+Desired State and Current State
+
+## [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+1. Replication controller
+2. Rolling updates: when updating a pod, k8s take down one replica and spin up a new pod with the update
+   then does the same with a second replica and the rest one by one (or by groups)
+
+## Other Workload (not covered in detail here)
+* [CronJob](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)
+* [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) (run copy of a pod on every)
+* [Jobs](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+* [StatefulSets](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/) (like deployments, but optimized for stateful)
+
+## [Labels & Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)
+* Key/value pairs for K8s objects
+* Organize and select objects
+* Used to define relationships of objects
+  E.g. service -> pod
+

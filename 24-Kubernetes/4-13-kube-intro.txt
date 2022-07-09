@@ -1,0 +1,20 @@
+
+### Kube Intro
+
+#### Helm
+
+Is a package manager for kubernetes. It works using Charts (scripts) to define, install and upgrade a Kubernetes application.
+* A Chart is a Helm package. It contains the all the definitions to run an application inside of a Kubernetes cluster.
+* A Repository is the place where Charts can be collected and shared.
+* A Release is an instance of a chart running in a Kubernetes cluster. One Chart can be installed many time into the same cluster. Each time a new release is created.
+
+**In summary**:  
+Helm installs charts into Kubernetes, creating a new release for each installation. And to find new charts, you can search Helm chart repositories.
+
+### Ingress
+
+Manages external access to the services in a cluster.  
+[Ingress Controllers](https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/)  
+[Create ingress controller in Azure](https://docs.microsoft.com/en-us/azure/aks/ingress-basic?tabs=azure-cli)  
+
+###

@@ -1,0 +1,60 @@
+### Install kubectl
+
+https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+
+#### Enable *kubectl* autocompletion
+
+```
+echo 'source <(kubectl completion bash)' >>~/.bashrc
+```
+
+If you have an alias for kubectl, you can extend shell completion to work with that alias:
+
+```
+echo 'alias ks=kubectl' >>~/.bashrc
+echo 'complete -o default -F __start_kubectl ks' >>~/.bashrc
+```
+
+If you are going to use kubectl a lot. Consider enabling k8s aliases with [kubectl-aliases](https://github.com/ahmetb/kubectl-aliases)
+
+### Install a local kubernetes cluster (or get a cloud cluster)
+
+For the local environment, we can install: 
+* [minikube](https://minikube.sigs.k8s.io/docs/start/)
+
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+```
+
+Set the driver to be docker:
+```
+minikube config set driver docker
+```
+
+Start minikube:
+```
+minikube start
+```
+
+Or:
+* Enable the docker desktop kubernetes single-node cluster in  
+  configuration -> kubernetes -> Enable Kubernetes
+
+---
+
+#### Play araund a little:
+
+* Spin up a nginx server and forward the internal port to localhost
+```
+kubectl run nginx --image=nginx:alpine --port=80
+kubectl port-forward nginx 8080:80
+```
+
+* Spin up a debian image and connect to the bash:
+```
+kubectl run my-shell --rm -it --image debian -- bash
+```
+
+---

@@ -1,0 +1,23 @@
+{
+    "apiVersion": "v1",
+    "kind": "Pod",
+    "metadata": {
+        "name": "api-demo-pod",
+        "labels": {
+            "app": "api-demo"
+        }
+    },
+    "spec": {
+        "containers": [
+            {
+                "name": "api-demo-pod",
+                "image": "nginx:alpine",
+                "ports": [
+                    {
+                        "containerPort": 80
+                    }
+                ]
+            }
+        ]
+    }
+}
